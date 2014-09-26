@@ -45,7 +45,7 @@ public class SendData extends Thread {
                     end = true;
                 } else {
                     packet_Sent = new DatagramPacket(message.getBytes(), message.getBytes().length, InetAddress.getByName(connectedIPAddress), connectedPortAddress);
-                    System.out.println("Packet Sent: " + packet_Sent.getPort() + " " + packet_Sent.getAddress());
+                    //System.out.println("Packet Sent: " + packet_Sent.getPort() + " " + packet_Sent.getAddress());
 
                     socket.send(packet_Sent);
                 }

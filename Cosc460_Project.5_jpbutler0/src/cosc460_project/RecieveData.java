@@ -31,10 +31,10 @@ public class RecieveData extends Thread {
             do {
                 DatagramPacket packet_Recieved = new DatagramPacket(messageByte, messageByte.length);
                 socket.receive(packet_Recieved);
-                System.out.println("Packet Recieved: " + packet_Recieved.getPort() + " " + packet_Recieved.getAddress());
+                //System.out.println("Packet Recieved: " + packet_Recieved.getPort() + " " + packet_Recieved.getAddress());
 
                 String message = new String(packet_Recieved.getData(), packet_Recieved.getOffset(), packet_Recieved.getLength());
-                System.out.println("Peer: " + message);
+                System.out.println("Recieved: " + message);
 
                 sleep((int) (Math.random() * 1000));
 
