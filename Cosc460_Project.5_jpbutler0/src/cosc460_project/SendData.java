@@ -11,10 +11,10 @@ import java.util.Scanner;
  */
 public class SendData extends Thread {
 
-    DatagramSocket socket;
-    DatagramPacket packet_Sent;
-    String connectedIPAddress;
-    int connectedPortAddress;
+    private DatagramSocket socket;
+    private DatagramPacket packet_Sent;
+    private String connectedIPAddress;
+    private int connectedPortAddress;
 
     public SendData(DatagramSocket socket, DatagramPacket packet_Sent, String connectedIPAddress, int connectedPortAddress) {
         try {
