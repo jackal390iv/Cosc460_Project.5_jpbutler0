@@ -1,45 +1,31 @@
 package cosc460_project;
 
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.net.ServerSocket;
 import java.util.Scanner;
 
 /**
  *
  * @author Jonathan Butler
  */
-public class Chat {
+public class Server {
 
-    private DatagramSocket socket;
-    private DatagramPacket packet_Sent;
+    private ServerSocket socket;
 
     public static void main(String[] args) {
-        new Chat();
+        new Server();
     }
 
-    public Chat() {
-        try {
-            socket = new DatagramSocket();
-            System.out.println("Port Address: " + socket.getLocalPort());
-            System.out.println("IPAddress: " + InetAddress.getLocalHost().getHostAddress());
-            clientServer();
-
-        } catch (Exception ex) {
-            System.out.println("Cause: " + ex.getCause());
-            System.out.println("Message: " + ex.getMessage());
-            System.out.println("Local Message: " + ex.getLocalizedMessage());
-            //ex.printStackTrace();*/
-        }
-    }
-
-    private void clientServer() {
-
+    public Server() {
         try {
             Boolean check = false;
             Scanner input;
             String connectedIPAddress;
             int connectedPortAddress;
+
+            socket = new ServerSocket(0);
+            System.out.println("Socket Port: " + socket.getLocalPort());
+            System.out.println("IPAddress: " + InetAddress.getLocalHost().getHostAddress());
 
             do {
                 input = new Scanner(System.in);
@@ -58,11 +44,8 @@ public class Chat {
                 }
             } while (check == false);
 
-            System.out.println("Port: " + connectedPortAddress + " IP: " + connectedIPAddress);
-            System.out.println("Connection Established. Please enter 'EXIT' to exit program.");
-
-            new RecieveData(socket).start();
-            new SendData(socket, packet_Sent, connectedIPAddress, connectedPortAddress).start();
+            new Client(InetAddress.getByName(connectedIPAddress), connectedPortAddress).start();
+            new ServerHelper(socket).start();
 
         } catch (Exception ex) {
             System.out.println("Cause: " + ex.getCause());
